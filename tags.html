@@ -1,0 +1,36 @@
+---
+layout: default
+title: Tags
+---
+
+<div class="container">
+  <div class="row">
+    <h1>Tags</h1>
+
+    <div class="archive-cloud tags-cloud">
+      {% for tag in site.tags %}
+        <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }} ({{ tag[1].size }})</a>
+      {% endfor %}
+    </div>
+
+    <hr />
+
+    <div class="archive-posts-list tag-posts-list">
+    {% for tag in site.tags %}
+      <span class="fa fa-book" aria-hidden="true" id="{{ tag[0] }}">
+        <span class="text">{{ tag[0] }}</span>
+      </span>
+
+      <ul class="posts-list">
+      {% for post in tag[1] %}
+        <li><a class="post-title" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}<small class="post-date">{{ post.date | date:"%Y-%m-%d" }}</small></a></li>
+        {% if post.subtitle %}
+          -<a class="post-subtitle">{{ post.subtitle }}</a>
+        {% endif %}
+      {% endfor %}
+      </ul>
+    {% endfor %}
+    </div>
+
+  </div>
+</div>

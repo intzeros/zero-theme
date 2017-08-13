@@ -1,0 +1,366 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+$height-footer: 40px;
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: $height-footer;
+}
+
+strong {
+    font-weight: bolder;
+}
+
+pre.highlight {
+    font-size: 90%;
+    background: #272822;
+}
+
+.post h4 {
+    margin-top: 15px;
+}
+
+/*---------------------- post-meta ------------------------*/
+
+.post-preview .post-title a {
+    color: #404040;
+}
+
+.post-preview .post-title a:hover,
+.post-preview .post-title a:focus {
+    color: #337ab7;
+}
+
+.post-info {
+    margin: 10px 0;
+}
+
+.post-info .post-date{
+    color: #777;
+    font-family: "PT Serif",Georgia,"Times New Roman",serif;
+}
+
+.post-info .fa {
+    background-color: rgba(106, 159, 181, 0.15);
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    color: #6a9fb5;
+}
+
+.post-info .fa a {
+    padding: 0 3px;
+}
+
+.post-preview .post-more {
+    text-align: right;
+}
+
+.post-more a.read-more {
+    color: #ffffff;
+    background-color: #5bc0de;
+    padding: 7px 12px;
+    border-radius: 14px;
+}
+
+.post .post-info {
+    margin-bottom: -10px;
+}
+
+.post-pagination {
+    margin-bottom: 60px;
+}
+
+.post-pagination .previous {
+    float: left;
+}
+
+.post-pagination .next {
+    float: right;
+}
+
+.post-pagination a {
+    border: 1px solid #EAEAEA;
+    background-color: #48D1CC;
+    color: #ffffff;
+    text-decoration: none;
+}
+.post-pagination a:hover,
+.post-pagination a:focus {
+    color: #fff;
+    text-decoration: underline;
+}
+
+
+@media (max-width: 800px) {
+    #sidebar {
+        display:none !important;
+    }
+}
+
+.sidebar-content {
+    margin-top: 20px;
+}
+
+/*---------------------- main-sidebar ------------------------*/
+
+.main-sidebar {
+    margin-left: 20px;
+}
+
+.main-sidebar .author-avatar img {
+    border-radius: 50%;
+    max-width: 180px;
+    border: 1px solid #f2f3f3;
+    padding: 5px;
+    margin: 10px auto;
+    display: block;
+}
+
+.brief-intro {
+    margin-bottom: 6px;
+}
+
+.brief-intro .author-name {
+    font-size: 25px;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+.brief-intro .author-bio {
+    text-align: center;
+    color: #333;
+}
+
+/*--------- site-state-count ----------*/
+.site-state {
+    text-align: center;
+    padding: 5px 0;
+}
+
+.site-state a {
+    color: #777;
+}
+.site-state a:hover,
+.site-state a:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+.site-state-item {
+    display: inline-block;
+    padding: 0 15px;
+    border-left: 1px solid #eee;
+}
+.site-state-item:first-child {
+    border-left: none;
+}
+
+.site-state-item-count {
+    display: block;
+}
+
+/*--------- social-icons ----------*/
+.social-icons { 
+    text-align: center;
+    margin-bottom: -10px;
+}
+
+.social-icons .fa-lg{ 
+    font-size: 14px;
+}
+
+.social-icons .fa-github, .social-icons .fa-weibo, .social-icons .fa-twitter, .social-icons .fa-twitter-square, .social-icons .fa-circle {
+    color: #777;
+}
+
+.social-icons .btn {
+    padding: 6px 4px;
+    width: 40px;
+}
+
+/*---------------------- post-sidebar ------------------------*/
+
+.post-sidebar {
+    background-color: #fff;
+    margin-left: 20px;
+}
+
+.headers-sidenav {
+    padding: 20px 10px;
+    padding-left: 0px;
+    border: 1px solid #EAEAEA;
+    width: 250px;
+}
+
+/* All levels of nav */
+.header-list-sidebar .nav > li > a {
+    display: block;
+    padding: 2px 20px;
+    font-weight: bold;
+    color: #767676;
+    /*no wrap*/
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: normal;
+}
+
+.header-list-sidebar .nav > li > a:hover,
+.header-list-sidebar .nav > li > a:focus {
+    color: #87CEFA;
+    text-decoration: none;
+    background-color: transparent;
+    border-left: 2px solid #87CEFA;
+}
+.header-list-sidebar .nav > .active > a,
+.header-list-sidebar .nav > .active:hover > a,
+.header-list-sidebar .nav > .active:focus > a {
+    font-weight: bold;
+    color: #5bc0de;
+    background-color: transparent;
+    border-left: 2px solid #5bc0de;
+}
+
+/* Nav: second level (shown on .active) */
+.header-list-sidebar .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 35px;
+}
+.header-list-sidebar .nav .nav > li > a:hover,
+.header-list-sidebar .nav .nav > li > a:focus {
+
+}
+.header-list-sidebar .nav .nav > .active > a,
+.header-list-sidebar .nav .nav > .active:hover > a,
+.header-list-sidebar .nav .nav > .active:focus > a {
+
+}
+
+/* Nav: 3rd level (shown on .active) */
+.header-list-sidebar .nav .nav .nav {
+
+}
+.header-list-sidebar .nav .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 50px;
+}
+.header-list-sidebar .nav .nav .nav > li > a:hover,
+.header-list-sidebar .nav .nav .nav > li > a:focus {
+
+}
+.header-list-sidebar .nav .nav .nav > .active > a,
+.header-list-sidebar .nav .nav .nav > .active:hover > a,
+.header-list-sidebar .nav .nav .nav > .active:focus > a {
+
+}
+
+
+/*--------- back-to-top link ---------*/
+.back-to-top {
+    background-color: #f0ad4e;
+    position: fixed;
+    color: #FFFFFF;
+    border-radius: 3px;
+    opacity: 0.7;
+    bottom: 20px;
+    display: block;
+    padding: 2px 14px;
+    font-size: 24px;
+    right: 20px;
+}
+
+a.back-to-top {
+    text-decoration: none;
+}
+
+a.back-to-top:hover,
+a.back-to-top:focus {
+    opacity: 1;
+    color: #fff;
+}
+
+
+/*---------------------- tags & categories ------------------------*/
+.archive-cloud a {
+    background-color: rgba(106,159,181,0.15);
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    color: #6a9fb5;
+}
+
+.archive-cloud a:hover,
+.archive-cloud a:focus {
+    background-color: #008080;
+    color: #fff;
+    opacity: 0.7;
+}
+
+.archive-posts-list .fa {
+    color: #5bc0de;
+    font-size: 20px;
+}
+
+.archive-posts-list .text {
+    font-size: 26px;
+}
+
+.archive-posts-list ul {
+    list-style-type: circle;
+    margin: 10px 0;
+}
+
+.archive-posts-list li {
+    margin: 5px;
+}
+
+.archive-posts-list .posts-list a {
+    text-decoration: none;
+    color: #404040;
+    font-size: 16px;
+}
+
+.archive-posts-list .posts-list a:hover,
+.archive-posts-list .posts-list a:focus {
+    color: #FFA500;
+}
+
+.archive-posts-list .post-date {
+    color: #9a9a9a;
+    margin-left: 5px;
+}
+
+/*---------------------- footer copyright ------------------------*/
+
+.footer {
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    height: $height-footer;
+    background-color: #F8F8F8;
+    border-top: 1px solid #EAEAEA;
+}
+
+.footer .copyright {
+    font-size: 14px;
+    line-height: 18px;
+    padding: 10px 0px;
+    margin: 0 auto;
+    display: block;
+    color: #404040;
+    text-align: center;
+}

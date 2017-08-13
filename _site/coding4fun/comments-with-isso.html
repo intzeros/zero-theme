@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>
+    
+      搭建Isso评论服务 &middot; Soki's Blog
+    
+  </title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="/assets/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+  <!-- My CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+
+  <!-- MathJax -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        equationNumbers: {
+          autoNumber: "AMS"
+        }
+      },
+      tex2jax: {
+        inlineMath: [ ['$','$'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+      }
+    });
+  </script>
+  
+
+  <!-- code highlighting-->
+  <link rel="stylesheet" href="/lib/highlight/styles/hybrid.css">
+  <script src="/lib/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>hljs.configure({ ignore: ['text'] });</script>
+  
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <header class="header">
+  <!-- Navigation -->
+  <nav class="navbar navbar-default .navbar-static-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/" style="color:#333">Soki's Blog</a>
+        <p class="navbar-text">God does not play dice.</p>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="nav-search">
+            <form class="navbar-form navbar-left" role="search" id="search-form">
+              <div class="input-group">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" style="color:#777">Go!</button>
+                  </span>
+                  <input type="text" id="search-input" class="form-control" placeholder="Search">
+                  
+              </div>
+            </form>
+          </li>
+          <li>
+            <a href="/archives.html">Archives</a>
+          </li>
+          <li>
+            <a href="/categories.html">Categories</a>
+          </li>
+          <li>
+            <a href="/tags.html">Tags</a>
+          </li>
+          <li>
+            <a href="/about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  
+    <div class="container">
+  <div class="row-fluid main">
+    <div class="content col-md-9">
+      <article class="post">
+        <h1 class="post-title">搭建Isso评论服务</h1>
+
+        <div class="post-info">
+          <span class="post-date">09 Aug 2017</span>
+           | 
+            <span class="fa fa-folder-open" aria-hidden="true">
+            
+              <a class="categories" href="/categories.html#coding4fun">coding4fun</a>
+            
+            </span>
+          
+           | 
+            <span class="fa fa-tag" aria-hidden="true">
+            
+              <a class="post-tags" href="/tags.html#jekyll">jekyll</a>
+            
+              <a class="post-tags" href="/tags.html#blog">blog</a>
+            
+            </span>
+          
+        </div>
+
+        <hr>
+        <p>与其借助第三方服务天天担心挂，还不如将自己的服务器资源利用起来。<a href="https://posativ.org/isso/">Isso</a>就是自建评论系统的一种方式。（官网需要fq.）</p>
+
+<h2 id="install-isso">Install Isso</h2>
+
+<p>测试自Ubuntu服务器。本来官网文档里没那么多戏，但是我一直报错。。又安了很多其它包。</p>
+
+<pre><code class="language-text">$ sudo apt-get install python3-dev
+$ sudo pip install isso
+$ sudo apt-get install sqlite3
+
+# 可能需要：
+$ sudo pip install werkzeug
+$ sudo apt-get install libffi-dev
+$ sudo pip install misaka
+</code></pre>
+
+<!-- more -->
+
+<h2 id="configuration">Configuration</h2>
+
+<p>首先新建一个isso配置文件，<code class="highlighter-rouge">vi isso.conf</code>，放哪儿都行。</p>
+
+<pre><code class="language-text">[general]
+; database location, check permissions, automatically created if not exists
+; your website or blog (not the location of Isso!)
+dbpath = xxx/comments.db
+name = example
+; you can add multiple hosts for local development
+; or SSL connections. There is no wildcard to allow
+; any domain.
+host = http://lszero.com/
+notify =
+log-file = xxx/isso.log
+
+[server]
+listen = http://localhost:8090/
+
+[moderation]
+enabled = false
+purge-after = 30d
+
+[smtp]
+username = username@example.com
+password = password
+host = smtp.example.com
+port = 587
+security = starttls
+to = your email address
+from = "Isso Comment"&lt;username@example.com&gt;
+timeout = 10
+
+[markup]
+options = strikethrough, superscript, autolink
+allowed-elements =
+allowed-attributes =
+
+[guard]
+enabled = true
+ratelimit = 3
+direct-reply = 3
+reply-to-self = true
+require-author = true
+require-email = true
+
+...
+</code></pre>
+
+<p>其中，</p>
+
+<ul>
+  <li><code class="highlighter-rouge">dbpath</code> 是数据库文件，会自动生成。</li>
+  <li><code class="highlighter-rouge">host</code> 可以添加多个。</li>
+  <li><code class="highlighter-rouge">notify</code> 选择新评论的通知方式。<code class="highlighter-rouge">stdout</code>或者<code class="highlighter-rouge">smtp</code>。</li>
+  <li><code class="highlighter-rouge">listen</code> 设置端口。</li>
+  <li><code class="highlighter-rouge">moderation</code> 是否开启评论审核。若开启，新的评论不会显示，除非你activate。</li>
+  <li><code class="highlighter-rouge">smtp</code> 即设置邮件服务的配置信息。</li>
+  <li><code class="highlighter-rouge">guard</code> 评论防火墙。</li>
+  <li><code class="highlighter-rouge">ratelimit</code> 每个访客一分钟最多可以评论的次数。</li>
+  <li><code class="highlighter-rouge">direct-reply</code> 评论回复次数。</li>
+  <li><code class="highlighter-rouge">reply-to-self</code> 是否可以回复自己的评论，需要配合 JS 引用，下面会说</li>
+</ul>
+
+<p>更多设置选项参见<a href="https://posativ.org/isso/docs/configuration/server/?utm_source=sb.sb">官网文档</a>。</p>
+
+<p>运行isso：</p>
+
+<pre><code class="language-text">$ isso -c /path/to/isso.conf run
+</code></pre>
+
+<h2 id="反向代理">反向代理</h2>
+
+<p>根据上述配置，isso运行在http://localhost:8090下。我们现在需要通过反向代理功能，目的是让发送到comments.lszero.com的请求被转发到本地isso的端口。</p>
+
+<p>官网给了nginx的配置，我这里也用apache测试了。</p>
+
+<h3 id="with-nginx">with nginx</h3>
+
+<p>修改nginx配置：<code class="highlighter-rouge">vi /etc/nginx/sites-enabled/default</code>，在开头添加：</p>
+
+<pre><code class="language-text">server {
+    listen 80;
+    server_name comments.lszero.com;
+
+    location / {
+        proxy_pass http://localhost:8090;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+</code></pre>
+
+<p>启动nginx：</p>
+
+<pre><code class="language-text">sudo service nginx start
+</code></pre>
+
+<p>有时候nginx配置文件错误，上述命令并没有任何错误提示。</p>
+
+<p>可以通过<code class="highlighter-rouge">sudo service nginx status</code>查看是否真的启动了。或者通过<code class="highlighter-rouge">sudo nginx -t</code>来测试配置是否正确。</p>
+
+<h3 id="with-apache2">with apache2</h3>
+
+<p>配置环境是Ubuntu apache2.</p>
+
+<p>首先要通过<code class="highlighter-rouge">a2enmod</code>加载命令加载代理模块：</p>
+
+<pre><code class="language-text">a2enmod proxy proxy_http
+</code></pre>
+
+<p>然后添加一个VirtualHost，为了方便，我这里就直接在 /etc/apache2/sites-available/000-default.conf 上改了。</p>
+
+<pre><code class="language-text">&lt;VirtualHost *:80&gt;
+        ServerAdmin intzero@outlook.com
+        ServerName comments.lszero.com
+        # off表示开启反向代理，on表示开启正向代理
+        ProxyRequests Off
+        # 将这个虚拟主机跳转到本机的8090端口
+        ProxyPass / http://localhost:8090/
+        ProxyPassReverse / http://localhost:8090/
+        &lt;Proxy *&gt;
+                Order Deny,Allow
+                Allow from all
+        &lt;/Proxy&gt;
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<h2 id="test">Test</h2>
+
+<p>将下列代码插入你想显示评论功能的位置：</p>
+
+<pre><code class="language-text">&lt;script data-isso="//comments.lszero.com/"
+        src="//comments.lszero.com/js/embed.min.js"&gt;&lt;/script&gt;
+
+&lt;section id="isso-thread"&gt;&lt;/section&gt;
+</code></pre>
+
+<p>这里的更多设置选项参见<a href="https://posativ.org/isso/docs/configuration/client/">官网文档</a>。比如开启支持/反对功能，一页显示评论数等。</p>
+
+<p>然后启动web服务和isso：</p>
+
+<pre><code class="language-text">$ sudo service nginx start   # or 'sudo service apache2 start'
+$ isso -c /path/to/isso.conf run
+</code></pre>
+
+<p>这样就可以了。</p>
+
+<p>小提示：</p>
+
+<p>如果你在发评论自己测试的时候遇到403 Forbidden的错误，你可能是需要修改isso的配置文件，设置<code class="highlighter-rouge">reply-to-self = true</code>，让自己可以回复自己。</p>
+
+        <br><br>
+      </article>
+
+      <nav class="post-pagination">
+        
+        <a href="/coding4fun/multisite-setting.html" class="btn previous" title="利用Apache进行多站点配置">&larr; 利用Apache进行多站点配置</a>
+        
+        
+      </nav>
+
+      <hr>
+
+      
+      <aside class="related">
+        <h3>Related Posts</h3>
+        <ul class="related-posts">
+          
+            <li>
+              <a href="/coding4fun/multisite-setting.html">
+                利用Apache进行多站点配置
+                <small><time datetime="2017-08-08T16:30:00+08:00">08 Aug 2017</time></small>
+              </a>
+            </li>
+          
+            <li>
+              <a href="/coding4fun/static-website-with-jekyll.html">
+                从WordPress到静态网站
+                <small><time datetime="2017-08-01T20:00:00+08:00">01 Aug 2017</time></small>
+              </a>
+            </li>
+          
+        </ul>
+      </aside>
+      
+
+      <!-- Gitment -->
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: '页面 ID', // 可选。默认为 location.href
+  owner: 'lszero',
+  repo: 'lszero.github.io',
+  oauth: {
+    client_id: '5cbd280dd9b27339aee6',
+    client_secret: '18164941d46a714a7577cb7d14e642936ad2ac16',
+  },
+})
+gitment.render('container')
+</script>
+    </div>
+    
+    <div class="sidebar-content col-md-3">
+      <div class="post-sidebar" id="sidebar">
+  <nav class="header-list-sidebar">
+    <ul id="sideNav" class="nav headers-sidenav">
+        <!-- code will be generated in TOC.js -->
+    </ul>
+  </nav>
+</div>
+    </div>
+  </div>
+</div>
+
+
+    <footer class="footer">
+  <div class="copyright">
+      Copyright &copy; <time datetime="2017-08-13T23:26:43+08:00">2017</time> <a href="http://localhost:4000">lszero</a> | Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a> | Designed by <a href="http://localhost:4000">lszero</a>
+  </div>
+</footer>
+
+    <a href="#top" class="back-to-top">^</a>
+
+<!--      -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/assets/js/jquery-1.12.4.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <!-- TOC -->
+    <script src="/assets/js/toc/TOC.js"></script>
+
+    <script>$("#search-form").submit(function(event){
+      var query = document.getElementById("search-input").value;
+      window.open("http://google.com/search?q=" + query + "%20site:" + "lszero.github.io");
+    });</script>
+  </body>
+</html>
