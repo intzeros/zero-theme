@@ -19,8 +19,6 @@ See [Demo](https://lszero.github.io/).
 
 ![index](https://github.com/lszero/zero-theme/blob/master/img/demo-index.png)
 
----
-
 * Post - Table of Contents
 
 ![Table of Contents](https://github.com/lszero/zero-theme/blob/master/img/demo-post.png)
