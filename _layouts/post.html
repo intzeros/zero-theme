@@ -4,7 +4,7 @@ layout: default
 
 <div class="container">
   <div class="row-fluid main">
-    <div class="content col-md-9">
+    <div class="col-md-9 content">
       <article class="post">
         <h1 class="post-title">{{ page.title }}</h1>
 
@@ -13,7 +13,7 @@ layout: default
           {% if page.categories.size > 0 %} | 
             <span class="fa fa-folder-open" aria-hidden="true">
             {% for category in page.categories %}
-              <a class="categories" href="{{ site.baseurl }}/categories.html#{{ category }}">{{ category }}</a>
+              <a class="post-categories" href="{{ site.baseurl }}/categories.html#{{ category }}">{{ category }}</a>
             {% endfor %}
             </span>
           {% endif %}
@@ -27,7 +27,9 @@ layout: default
         </div>
 
         <hr>
-        {{ content }}
+        <div class="post-content">
+          {{ content }}
+        </div>
         <br><br>
       </article>
 
@@ -61,8 +63,8 @@ layout: default
       {% include {{ site.baseurl }}comments.html %}
     </div>
     
-    <div class="sidebar-content col-md-3">
-      {% include {{ site.baseurl }}post_sidebar.html %}
+    <div class="col-md-3 post-sidebar">
+      {% include {{ site.baseurl }}sidebar_post.html %}
     </div>
   </div>
 </div>

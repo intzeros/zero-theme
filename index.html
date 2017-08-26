@@ -5,7 +5,7 @@ title: Home
 
 <div class="container">
   <div class="row-fluid main">
-    <div class="content posts col-md-9">
+    <div class="col-md-9 content main-posts-preview">
       {% for post in paginator.posts %}
       <article class="post-preview">
         <h1 class="post-title">
@@ -17,7 +17,7 @@ title: Home
           {% if post.categories.size > 0 %} | 
             <span class="fa fa-folder-open" aria-hidden="true">
             {% for category in post.categories %}
-              <a class="categories" href="{{ site.baseurl }}/categories.html#{{ category }}">{{ category }}</a>
+              <a class="post-categories" href="{{ site.baseurl }}/categories.html#{{ category }}">{{ category }}</a>
             {% endfor %}
             </span>
           {% endif %}
@@ -30,11 +30,11 @@ title: Home
           {% endif %}
         </div>
 
-        <div class="content">
+        <div class="post-excerpt">
           {{ post.excerpt }}
         </div>
 
-        <div class="post-more">
+        <div class="post-readmore">
           <a class="read-more" href="{{ post.url }}">Read More</a>
         </div>
       </article>
@@ -71,8 +71,8 @@ title: Home
       {% endif %}
     </div>
 
-    <div class="sidebar-content col-md-3">
-      {% include {{ site.baseurl }}main_sidebar.html %}
+    <div class="col-md-3 main-sidebar">
+      {% include {{ site.baseurl }}sidebar_main.html %}
     </div>
   </div>
 </div>

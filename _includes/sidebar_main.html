@@ -1,0 +1,75 @@
+<div class="sidebar-content" id="sidebar">
+  <div class="author-avatar">
+    <img src="{{ site.baseurl }}/assets/img/author_avatar.jpg" alt="lszero">
+  </div>
+
+  <div class="brief-intro">
+    <div class="author-name">
+      {{ site.author }}
+    </div>
+    <div class="author-bio">
+      {{ site.description }}
+    </div>
+  </div>
+
+  <nav class="site-state">
+    <div class="site-state-item">
+      <a href="{{ site.baseurl }}/archives.html">
+        <span class="site-state-item-count">{{ site.posts | size }}</span>
+        <span>Posts</span>
+      </a>
+    </div>
+    <div class="site-state-item">
+      <a href="{{ site.baseurl }}/categories.html">
+        <span class="site-state-item-count">{{ site.categories.size }}</span>
+        <span>Categories</span>
+      </a>
+    </div>
+    <div class="site-state-item">
+      <a href="{{ site.baseurl }}/tags.html">
+        <span class="site-state-item-count">{{ site.tags.size }}</span>
+        <span>Tags</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="social-icons">
+    <a href="{{ site.social_media.github_url }}" class="btn" title="Github" target="_blank"><i class="fa fa-fw fa-github fa-2x" aria-hidden="true"></i></a>
+    <a href="{{ site.social_media.weibo_url }}" class="btn" title="Weibo" target="_blank"><i class="fa fa-fw fa-weibo fa-2x" aria-hidden="true"></i></a>
+    <a href="{{ site.social_media.zhihu_url }}" class="btn" title="Zhihu" target="_blank"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-stack-1x fa-inverse"><strong>知</strong></i></span></a>
+    <a href="{{ site.social_media.twitter_url }}" class="btn" title="Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+    <a href="{{ site.social_media.lofter_url }}" class="btn" title="Lofter" target="_blank"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-stack-1x fa-inverse"><strong>L</strong></i></span></a>
+  </div>
+
+  <hr />
+
+  <nav class="category-list list-group">
+    <h3 class="sidebar-title">Categories</h3>
+    <ul class="list-group">
+    {% for category in site.categories %}
+      <li class="list-group-item">
+        <a href="{{ site.baseurl }}/categories.html#{{ category[0] }}">{{ category[0] }}</a>
+        <span class="badge">{{ category[1].size }}</span>
+      </li>
+    {% endfor %}
+    </ul>
+  </nav>
+
+  <hr />
+
+  <nav class="tags-list">
+    <h3 class="sidebar-title">Tags</h3>
+    <ul class="list-group">
+    {% for tag in site.tags %}
+      <li class="list-group-item">
+        <a href="{{ site.baseurl }}/tags.html#{{ tag[0] }}"> {{ tag[0] }}</a>
+        <span class="badge">{{ tag[1].size }}</span>
+      </li>
+    {% endfor %}
+    </ul>
+  </nav>
+
+  <hr />
+
+</div>
+
