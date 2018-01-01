@@ -13,8 +13,8 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Soki's Blog
-author: lszero
+title: intzero's Blog
+author: intzero
 email: intzero@outlook.com
 description: > # this means to ignore newlines until "baseurl:"
   程序媛/小硕/外协/折腾/技术宅
