@@ -19,6 +19,7 @@ email: intzero@outlook.com
 description: > # this means to ignore newlines until "baseurl:"
   程序媛/小硕/外协/折腾/技术宅
 url: http://lszero.com # the base hostname & protocol for your site, e.g. http://example.com
+sitesearchurl: lszero.github.io
 baseurl: "" # the subpath of your site, e.g. /blog
 
 # Markdown Processors

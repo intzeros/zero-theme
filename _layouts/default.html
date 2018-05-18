@@ -32,7 +32,7 @@
 
     <script>$("#search-form").submit(function(event){
       var query = document.getElementById("search-input").value;
-      window.open("http://google.com/search?q=" + query + "%20site:" + "lszero.github.io");
+      window.open("http://google.com/search?q=" + query + "%20site:" + "{{ site.sitesearchurl}}");
     });</script>
   </body>
 </html>
