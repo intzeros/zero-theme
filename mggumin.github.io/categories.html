@@ -1,0 +1,38 @@
+---
+layout: default
+title: Categories
+---
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1>Categories</h1>
+      
+      <div class="archive-cloud categories-cloud">
+        {% for category in site.categories %}
+          <a href="#{{ category[0] }}" title="{{ category[0] }}" rel="{{ category[1].size }}">{{ category[0] }} ({{ category[1].size }})</a>
+        {% endfor %}
+      </div>
+
+      <hr />
+
+      <div class="archive-posts-list category-posts-list">
+      {% for category in site.categories %}
+        <span class="fa fa-book" aria-hidden="true" id="{{ category[0] }}">
+          <span class="text">{{ category[0] }}</span>
+        </span>
+
+        <ul class="posts-list">
+        {% for post in category[1] %}
+          <li><a class="post-title" href="{{ site.baseurl }}{{ post.url }}"><small class="post-date">{{ post.date | date:"%Y-%m-%d" }}</small>{{ post.title }}</a></li>
+          {% if post.subtitle %}
+            -- <a class="post-subtitle">{{ post.subtitle }}</a>
+          {% endif %}
+        {% endfor %}
+        </ul>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+

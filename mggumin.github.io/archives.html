@@ -1,0 +1,22 @@
+---
+layout: default
+title: Archives
+---
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1>Archives</h1>
+
+      <hr />
+
+      <div class="archive-posts-list">
+        <ul class="posts-list">
+        {% for post in site.posts %}
+          <li><a class="post-title" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}<small class="post-date">{{ post.date | date:"%Y-%m-%d" }}</small></a></li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
